@@ -14,6 +14,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import steps.StepCrudUser;
 import steps.StepLoginUser;
+import util.UserCleanupHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,7 @@ public class UpdateUserDataTest {
 
     @AfterEach
     public void cleanup() {
-        for (Response authResponse : authResponsesForCleanup) {
-            if (authResponse != null && authResponse.getStatusCode() == 200) {
-                StepCrudUser.deleteUser(authResponse);
-            }
-        }
-        authResponsesForCleanup.clear();
+        UserCleanupHelper.cleanupCreatedUsers(authResponsesForCleanup);
     }
 
     @Test

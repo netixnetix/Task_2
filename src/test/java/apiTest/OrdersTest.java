@@ -14,6 +14,7 @@ import steps.StepCrudUser;
 import steps.StepLoginUser;
 import steps.StepIngredients;
 import steps.StepOrders;
+import util.UserCleanupHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +32,7 @@ public class OrdersTest {
 
     @AfterEach
     public void cleanup() {
-        for (Response authResponse : authResponsesForCleanup) {
-            if (authResponse != null && authResponse.getStatusCode() == 200) {
-                StepCrudUser.deleteUser(authResponse);
-            }
-        }
-        authResponsesForCleanup.clear();
+        UserCleanupHelper.cleanupCreatedUsers(authResponsesForCleanup);
     }
 
     @Test
