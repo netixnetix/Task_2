@@ -57,7 +57,7 @@ public class OrdersTest {
     @Description("POST /api/orders без Authorization с валидными ingredients — 200")
     public void createOrderWithoutAuth() {
         User user = new User(FakerData.email(), FakerData.name(), FakerData.pwd());
-        Response createResponse = StepCrudUser.create(user);
+        StepCrudUser.create(user);
         authResponsesForCleanup.add(StepLoginUser.signIn(user));
 
         CreateOrderRequest orderRequest = CreateOrderRequest.withIngredients(StepIngredients.getFirstIngredientIds(2));
@@ -94,7 +94,7 @@ public class OrdersTest {
     @Description("GET /api/orders с Authorization возвращает 200, success true и список orders")
     public void getOrdersAuthorized() {
         User user = new User(FakerData.email(), FakerData.name(), FakerData.pwd());
-        Response createResponse = StepCrudUser.create(user);
+        StepCrudUser.create(user);
         Response loginResponse = StepLoginUser.signIn(user);
         authResponsesForCleanup.add(loginResponse);
 
